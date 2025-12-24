@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid - Advanced Exercises</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            background: white;
+            color: #333;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #4f46e5, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .exercise {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #1f2937;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #4f46e5;
+            font-size: 1.8em;
+        }
+
+        .instructions {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #4f46e5;
+        }
+
+        .instructions h3 {
+            color: #374151;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .instructions ul {
+            margin-left: 20px;
+            color: #6b7280;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+        }
+
+        .workspace {
+            border: 3px dashed #d1d5db;
+            padding: 30px;
+            border-radius: 15px;
+            min-height: 400px;
+            margin-bottom: 25px;
+            background: #fafafa;
+            position: relative;
+        }
+
+        .workspace::before {
+            content: "Work Area - Add your CSS here";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 12px;
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        button {
+            background: linear-gradient(135deg, #4f46e5, #06b6d4);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        button.reset {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        button.hint {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .code-hint {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            display: none;
+            border: 2px solid #374151;
+        }
+
+        .code-hint.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Exercise 1: Netflix-style Layout */
+        .netflix-container {
+            /* Students will add grid code here */
+            min-height: 500px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #e50914, #831010);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .category-row {
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        .category-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #374151;
+        }
+
+        .movie-cards {
+            /* Students will add grid code here */
+        }
+
+        .movie-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            height: 150px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Exercise 2: Magazine Layout */
+        .magazine-layout {
+            /* Students will add grid code here */
+            min-height: 600px;
+        }
+
+        .magazine-header {
+            background: #1f2937;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .featured-article {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .side-article {
+            background: #e5e7eb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 5px 0;
+        }
+
+        .ad-space {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Exercise 3: E-commerce Product Grid */
+        .product-grid {
+            /* Students will add grid code here */
+        }
+
+        .product-item {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .product-item:hover {
+            border-color: #4f46e5;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.2);
+        }
+
+        .product-image {
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            color: white;
+            height: 120px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .product-featured {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .product-featured .product-image {
+            height: 200px;
+            font-size: 36px;
+        }
+
+        .product-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #374151;
+        }
+
+        .product-price {
+            color: #4f46e5;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* Exercise 4: Complex Dashboard */
+        .complex-dashboard {
+            /* Students will add grid code here */
+            min-height: 700px;
+        }
+
+        .dashboard-header {
+            background: #1f2937;
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .sidebar-nav {
+            background: #374151;
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .chart-widget {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .stats-widget {
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #e5e7eb;
+        }
+
+        .activity-feed {
+            background: #fef3c7;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #fbbf24;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+            animation: bounceIn 0.6s ease-out;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .difficulty-badge.hard {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
+        .difficulty-badge.expert {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Advanced CSS Grid Challenges</h1>
+            <p style="font-size: 1.3em; margin-top: 15px; color: #6b7280;">Master complex layouts with real-world scenarios!</p>
+        </div>
+
+        <!-- Exercise 1: Netflix-style Layout -->
+        <div class="exercise">
+            <h2>Exercise 1: Netflix-Style Streaming Layout</h2>
+            <div class="difficulty-badge">Intermediate</div>
+            
+            <div class="instructions">
+                <h3>🎬 Your Mission:</h3>
+                <p>Create a Netflix-style streaming service layout with a hero section and scrollable movie rows.</p>
+                <ul>
+                    <li>Hero section spans full width at the top</li>
+                    <li>Create multiple category rows below</li>
+                    <li>Each movie row should have 5 cards in a horizontal grid</li>
+                    <li>Movie cards should be 200px wide with 15px gaps</li>
+                    <li>Make it responsive: 3 cards on tablet, 2 on mobile</li>
+                </ul>
+            </div>
+
+            <div class="workspace">
+                <div class="netflix-container" id="netflix">
+                    <div class="hero-section">🎬 Featured Movie - Watch Now!</div>
+                    
+                    <div class="category-row">
+                        <div class="category-title">🔥 Trending Now</div>
+                        <div class="movie-cards">
+                            <div class="movie-card">Movie 1</div>
+                            <div class="movie-card">Movie 2</div>
+                            <div class="movie-card">Movie 3</div>
+                            <div class="movie-card">Movie 4</div>
+                            <div class="movie-card">Movie 5</div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-row">
+                        <div class="category-title">⭐ Top Rated</div>
+                        <div class="movie-cards">
+                            <div class="movie-card">Movie 6</div>
+                            <div class="movie-card">Movie 7</div>
+                            <div class="movie-card">Movie 8</div>
+                            <div class="movie-card">Movie 9</div>
+                            <div class="movie-card">Movie 10</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="applyNetflixLayout()">Apply Solution</button>
+            <button class="reset" onclick="resetNetflix()">Reset</button>
+            <button class="hint" onclick="toggleHint('hint1')">Show Hint</button>
+
+            <div class="code-hint" id="hint1">
+                .netflix-container {<br>
+                &nbsp;&nbsp;display: grid;<br>
+                &nbsp;&nbsp;grid-template-columns: 1fr;<br>
+                &nbsp;&nbsp;gap: 30px;<br>
+                }<br><br>
+                .movie-cards {<br>
+                &nbsp;&nbsp;display: grid;<br>
+                &nbsp;&nbsp;grid-template-columns: repeat(5, 200px);<br>
+                &nbsp;&nbsp;gap: 15px;<br>
+                &nbsp;&nbsp;overflow-x: auto;<br>
+                }<br><br>
+                @media (max-width: 768px) {<br>
+                &nbsp;&nbsp;.movie-cards {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;grid-template-columns: repeat(3, 150px);<br>
+                &nbsp;&nbsp;}<br>
+                }
+            </div>
+        </div>
+
+        <!-- Exercise 2: Magazine Layout -->
+        <div class="exercise">
+            <h2>Exercise 2: Magazine-Style Article Layout</h2>
+            <div class="difficulty-badge hard">Advanced</div>
+            
+            <div class="instructions">
+                <h3>📰 Your Mission:</h3>
+                <p>Create a sophisticated magazine layout with asymmetric article placement.</p>
+                <ul>
+                    <li>Magazine header spans full width</li>
+                    <li>Featured article takes 2/3 width and 2 rows height</li>
+                    <li>Side articles stack vertically in remaining 1/3 space</li>
+                    <li>Ad space at the bottom spans 2 columns</li>
+                    <li>Use grid areas for precise positioning</li>
+                </ul>
+            </div>
+
+            <div class="workspace">
+                <div class="magazine-layout" id="magazine">
+                    <div class="magazine-header">TECH MAGAZINE - Latest News & Reviews</div>
+                    <div class="featured-article">🌟 Featured: The Future of Web Development</div>
+                    <div class="side-article">📱 Mobile Trends 2024</div>
+                    <div class="side-article">🤖 AI in Design</div>
+                    <div class="side-article">🚀 Performance Tips</div>
+                    <div class="ad-space">📢 Advertisement Space</div>
+                </div>
+            </div>
+
+            <button onclick="applyMagazineLayout()">Apply Solution</button>
+            <button class="reset" onclick="resetMagazine()">Reset</button>
+            <button class="hint" onclick="toggleHint('hint2')">Show Hint</button>
+
+            <div class="code-hint" id="hint2">
+                .magazine-layout {<br>
+                &nbsp;&nbsp;display: grid;<br>
+                &nbsp;&nbsp;grid-template-columns: 2fr 1fr;<br>
+                &nbsp;&nbsp;grid-template-areas:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"header header"<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"featured side1"<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"featured side2"<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"featured side3"<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"ad ad";<br>
+                &nbsp;&nbsp;gap: 20px;<br>
+                }<br><br>
+                .magazine-header { grid-area: header; }<br>
+                .featured-article { grid-area: featured; }<br>
+                .side-article:nth-child(3) { grid-area: side1; }<br>
+                .side-article:nth-child(4) { grid-area: side2; }<br>
+                .side-article:nth-child(5) { grid-area: side3; }<br>
+                .ad-space { grid-area: ad; }
+            </div>
+        </div>
+
+        <!-- Exercise 3: E-commerce Product Grid -->
+        <div class="exercise">
+            <h2>Exercise 3: E-commerce Product Showcase</h2>
+            <div class="difficulty-badge">Intermediate</div>
+            
+            <div class="instructions">
+                <h3>🛍️ Your Mission:</h3>
+                <p>Build a responsive product grid with featured items that span multiple cells.</p>
+                <ul>
+                    <li>Create a responsive grid with auto-fit and minmax(250px, 1fr)</li>
+                    <li>Featured product spans 2x2 grid cells</li>
+                    <li>Regular products fill remaining spaces</li>
+                    <li>30px gaps between all products</li>
+                    <li>Grid should center itself when there aren't enough items to fill a row</li>
+                </ul>
+            </div>
+
+            <div class="workspace">
+                <div class="product-grid" id="products">
+                    <div class="product-item product-featured">
+                        <div class="product-image">⭐</div>
+                        <div class="product-name">Featured Product</div>
+                        <div class="product-price">$99.99</div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-image">📱</div>
+                        <div class="product-name">Smartphone</div>
+                        <div class="product-price">$599.99</div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-image">💻</div>
+                        <div class="product-name">Laptop</div>
+                        <div class="product-price">$1299.99</div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-image">🎧</div>
+                        <div class="product-name">Headphones</div>
+                        <div class="product-price">$299.99</div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-image">⌚</div>
+                        <div class="product-name">Smartwatch</div>
+                        <div class="product-price">$399.99</div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-image">📷</div>
+                        <div class="product-name">Camera</div>
+                        <div class="product-price">$899.99</div>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="applyProductGrid()">Apply Solution</button>
+            <button class="reset" onclick="resetProducts()">Reset</button>
+            <button class="hint" onclick="toggleHint('hint3')">Show Hint</button>
+
+            <div class="code-hint" id="hint3">
+                .product-grid {<br>
+                &nbsp;&nbsp;display: grid;<br>
+                &nbsp;&nbsp;grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));<br>
+                &nbsp;&nbsp;gap: 30px;<br>
+                &nbsp;&nbsp;justify-content: center;<br>
+                }<br><br>
+                .product-featured {<br>
+                &nbsp;&nbsp;grid-column: span 2;<br>
+                &nbsp;&nbsp;grid-row: span 2;<br>
+                }
+            </div>
+        </div>
+
+        <!-- Exercise 4: Complex Dashboard -->
+        <div class="exercise">
+            <h2>Exercise 4: Enterprise Dashboard Layout</h2>
+            <div class="difficulty-badge expert">Expert</div>
+            
+            <div class="instructions">
+                <h3>📊 Your Mission:</h3>
+                <p>Create a complex dashboard with multiple widget sizes and a sidebar navigation.</p>
+                <ul>
+                    <li>Header spans full width (all columns)</li>
+                    <li>Sidebar navigation spans full height (2 rows)</li>
+                    <li>Large chart widget spans 2 columns and 1 row</li>
+                    <li>Small stats widgets fill 1x1 spaces</li>
+                    <li>Activity feed spans remaining bottom space</li>
+                    <li>Use both grid areas and span properties</li>
+                </ul>
+            </div>
+
+            <div class="workspace">
+                <div class="complex-dashboard" id="dashboard">
+                    <div class="dashboard-header">📊 Enterprise Dashboard - Analytics Overview</div>
+                    <div class="sidebar-nav">
+                        📋 Navigation<br>
+                        • Dashboard<br>
+                        • Analytics<br>
+                        • Reports<br>
+                        • Settings
+                    </div>
+                    <div class="chart-widget">📈 Revenue Chart (2x1)</div>
+                    <div class="stats-widget">👥 Users<br>1,234</div>
+                    <div class="stats-widget">💰 Sales<br>$45,678</div>
+                    <div class="stats-widget">📞 Orders<br>890</div>
+                    <div class="activity-feed">
+                        📱 Recent Activity Feed<br>
+                        • New user registration<br>
+                        • Order #1234 completed<br>
+                        • Payment processed
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="applyDashboardLayout()">Apply Solution</button>
+            <button class="reset" onclick="resetDashboard()">Reset</button>
+            <button class="hint" onclick="toggleHint('hint4')">Show Hint</button>
+
+            <div class="code-hint" id="hint4">
+                .complex-dashboard {<br>
+                &nbsp;&nbsp;display: grid;<br>
+                &nbsp;&nbsp;grid-template-columns: 200px 1fr 1fr 1fr;<br>
+                &nbsp;&nbsp;grid-template-rows: auto 1fr 1fr;<br>
+                &nbsp;&nbsp;grid-template-areas:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"header header header header"<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"sidebar chart chart stats1"<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;"sidebar activity activity stats2";<br>
+                &nbsp;&nbsp;gap: 20px;<br>
+                &nbsp;&nbsp;min-height: 600px;<br>
+                }<br><br>
+                .dashboard-header { grid-area: header; }<br>
+                .sidebar-nav { grid-area: sidebar; }<br>
+                .chart-widget { grid-area: chart; }<br>
+                .stats-widget:nth-child(4) { grid-area: stats1; }<br>
+                .stats-widget:nth-child(6) { grid-area: stats2; }<br>
+                .activity-feed { grid-area: activity; }
+            </div>
+        </div>
+
+        <div id="success-message" class="success-message">
+            🎉 Excellent work! You've mastered advanced CSS Grid layouts!
+        </div>
+    </div>
+
+    <script>
+        // Exercise 1: Netflix Layout
+        function applyNetflixLayout() {
+            const netflix = document.getElementById('netflix');
+            netflix.style.display = 'grid';
+            netflix.style.gridTemplateColumns = '1fr';
+            netflix.style.gap = '30px';
+            
+            document.querySelectorAll('.movie-cards').forEach(cards => {
+                cards.style.display = 'grid';
+                cards.style.gridTemplateColumns = 'repeat(5, 200px)';
+                cards.style.gap = '15px';
+                cards.style.overflowX = 'auto';
+            });
+            showSuccess();
+        }
+
+        function resetNetflix() {
+            const netflix = document.getElementById('netflix');
+            netflix.style = '';
+            document.querySelectorAll('.movie-cards').forEach(cards => {
+                cards.style = '';
+            });
+        }
+
+        // Exercise 2: Magazine Layout
+        function applyMagazineLayout() {
+            const magazine = document.getElementById('magazine');
+            magazine.style.display = 'grid';
+            magazine.style.gridTemplateColumns = '2fr 1fr';
+            magazine.style.gridTemplateAreas = '"header header" "featured side1" "featured side2" "featured side3" "ad ad"';
+            magazine.style.gap = '20px';
+            
+            document.querySelector('.magazine-header').style.gridArea = 'header';
+            document.querySelector('.featured-article').style.gridArea = 'featured';
+            document.querySelectorAll('.side-article')[0].style.gridArea = 'side1';
+            document.querySelectorAll('.side-article')[1].style.gridArea = 'side2';
+            document.querySelectorAll('.side-article')[2].style.gridArea = 'side3';
+            document.querySelector('.ad-space').style.gridArea = 'ad';
+            showSuccess();
+        }
+
+        function resetMagazine() {
+            const magazine = document.getElementById('magazine');
+            magazine.style = '';
+            document.querySelectorAll('.magazine-layout > div').forEach(el => {
+                el.style.gridArea = '';
+            });
+        }
+
+        // Exercise 3: Product Grid
+        function applyProductGrid() {
+            const products = document.getElementById('products');
+            products.style.display = 'grid';
+            products.style.gridTemplateColumns = 'repeat(auto-fit, minmax(250px, 1fr))';
+            products.style.gap = '30px';
+            products.style.justifyContent = 'center';
+            showSuccess();
+        }
+
+        function resetProducts() {
+            const products = document.getElementById('products');
+            products.style = '';
+        }
+
+        // Exercise 4: Complex Dashboard
+        function applyDashboardLayout() {
+            const dashboard = document.getElementById('dashboard');
+            dashboard.style.display = 'grid';
+            dashboard.style.gridTemplateColumns = '200px 1fr 1fr 1fr';
+            dashboard.style.gridTemplateRows = 'auto 1fr 1fr';
+            dashboard.style.gridTemplateAreas = '"header header header header" "sidebar chart chart stats1" "sidebar activity activity stats2"';
+            dashboard.style.gap = '20px';
+            dashboard.style.minHeight = '600px';
+            
+            document.querySelector('.dashboard-header').style.gridArea = 'header';
+            document.querySelector('.sidebar-nav').style.gridArea = 'sidebar';
+            document.querySelector('.chart-widget').style.gridArea = 'chart';
+            document.querySelectorAll('.stats-widget')[0].style.gridArea = 'stats1';
+            document.querySelectorAll('.stats-widget')[1].style.gridArea = 'stats2';
+            document.querySelector('.activity-feed').style.gridArea = 'activity';
+            showSuccess();
+        }
+
+        function resetDashboard() {
+            const dashboard = document.getElementById('dashboard');
+            dashboard.style = '';
+            document.querySelectorAll('.complex-dashboard > div').forEach(el => {
+                el.style.gridArea = '';
+            });
+        }
+
+        // Utility functions
+        function toggleHint(hintId) {
+            const hint = document.getElementById(hintId);
+            hint.classList.toggle('show');
+        }
+
+        function showSuccess() {
+            setTimeout(() => {
+                const successMsg = document.getElementById('success-message');
+                successMsg.classList.add('show');
+                setTimeout(() => {
+                    successMsg.classList.remove('show');
+                }, 4000);
+            }, 300);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case '1':
+                        e.preventDefault();
+                        applyNetflixLayout();
+                        break;
+                    case '2':
+                        e.preventDefault();
+                        applyMagazineLayout();
+                        break;
+                    case '3':
+                        e.preventDefault();
+                        applyProductGrid();
+                        break;
+                    case '4':
+                        e.preventDefault();
+                        applyDashboardLayout();
+                        break;
+                }
+            }
+        });
+
+        // Fun console message
+        console.log('%c🎯 Advanced CSS Grid Master Challenge! %c\nKeyboard shortcuts: Ctrl+1, Ctrl+2, Ctrl+3, Ctrl+4\n\nReady to become a Grid Layout Expert? 🚀', 
+            'background: linear-gradient(135deg, #4f46e5, #06b6d4); color: white; font-size: 18px; padding: 10px;',
+            'color: #4f46e5; font-size: 14px;');
+    </script>
+</body>
+</html>
