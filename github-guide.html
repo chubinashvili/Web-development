@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ka">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Git და GitHub გზამკვლევი VS Code-ში</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+      }
+
+      header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      header p {
+        font-size: 1.1rem;
+        opacity: 0.95;
+      }
+
+      .content {
+        padding: 40px;
+      }
+
+      .section {
+        margin-bottom: 40px;
+        padding: 30px;
+        background: #f8f9fa;
+        border-radius: 15px;
+        border-left: 5px solid #667eea;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .section:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 20px rgba(102, 126, 234, 0.1);
+      }
+
+      .section h2 {
+        color: #667eea;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .section h2::before {
+        content: '📌';
+        font-size: 1.5rem;
+      }
+
+      .step {
+        background: white;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 10px;
+        border-left: 3px solid #764ba2;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .step-number {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 35px;
+        font-weight: bold;
+        margin-right: 15px;
+      }
+
+      .step h3 {
+        display: inline-block;
+        color: #333;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+
+      .step p {
+        margin-left: 50px;
+        color: #555;
+        line-height: 1.8;
+      }
+
+      .code-block {
+        background: #2d2d2d;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 15px 0 15px 50px;
+        font-family: 'Courier New', monospace;
+        overflow-x: auto;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .tip {
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 15px;
+        margin: 20px 0 20px 50px;
+        border-radius: 8px;
+        display: flex;
+        align-items: start;
+        gap: 10px;
+      }
+
+      .tip::before {
+        content: '💡';
+        font-size: 1.3rem;
+        flex-shrink: 0;
+      }
+
+      .warning {
+        background: #f8d7da;
+        border-left: 4px solid #dc3545;
+        padding: 15px;
+        margin: 20px 0 20px 50px;
+        border-radius: 8px;
+        display: flex;
+        align-items: start;
+        gap: 10px;
+      }
+
+      .warning::before {
+        content: '⚠️';
+        font-size: 1.3rem;
+        flex-shrink: 0;
+      }
+
+      .keyboard-key {
+        display: inline-block;
+        padding: 3px 8px;
+        background: #e9ecef;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 0.9rem;
+        box-shadow: 0 2px 0 #dee2e6;
+        margin: 0 2px;
+      }
+
+      .button-visual {
+        display: inline-block;
+        padding: 8px 16px;
+        background: #667eea;
+        color: white;
+        border-radius: 6px;
+        font-weight: 500;
+        margin: 0 5px;
+      }
+
+      footer {
+        background: #f8f9fa;
+        text-align: center;
+        padding: 30px;
+        color: #666;
+        border-top: 2px solid #e9ecef;
+      }
+
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 1.8rem;
+        }
+
+        .section {
+          padding: 20px;
+        }
+
+        .step p,
+        .code-block,
+        .tip,
+        .warning {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🚀 Git და GitHub სახელმძღვანელო</h1>
+        <p>VS Code GitHub Pull Requests გაფართოების გამოყენება</p>
+      </header>
+
+      <div class="content">
+        <!-- რეპოზიტორის ინიციალიზაცია -->
+        <div class="section">
+          <h2>რეპოზიტორის ინიციალიზაცია</h2>
+
+          <div class="step">
+            <span class="step-number">1</span>
+            <h3>VS Code-ის გახსნა</h3>
+            <p
+              >გახსენით VS Code და გადადით თქვენს პროექტის საქაღალდეში <span class="keyboard-key">File</span> →
+              <span class="keyboard-key">Open Folder</span></p
+            >
+          </div>
+
+          <div class="step">
+            <span class="step-number">2</span>
+            <h3>Source Control პანელის გახსნა</h3>
+            <p
+              >დააჭირეთ Source Control ხატულას მარცხენა პანელზე ან გამოიყენეთ <span class="keyboard-key">Ctrl</span> +
+              <span class="keyboard-key">Shift</span> + <span class="keyboard-key">G</span></p
+            >
+          </div>
+
+          <div class="step">
+            <span class="step-number">3</span>
+            <h3>რეპოზიტორის ინიციალიზაცია</h3>
+            <p>დააჭირეთ <span class="button-visual">Initialize Repository</span> ღილაკს</p>
+            <div class="tip">
+              <p>ეს შექმნის ახალ Git რეპოზიტორს თქვენს საქაღალდეში .git დირექტორიით</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- კომიტების გაკეთება -->
+        <div class="section">
+          <h2>კომიტების შექმნა</h2>
+
+          <div class="step">
+            <span class="step-number">1</span>
+            <h3>ფაილების დამატება Stage-ზე</h3>
+            <p
+              >Source Control პანელში დააჭირეთ <strong>+</strong> ნიშანს ფაილის გასწვრივ ან დააჭირეთ
+              <span class="button-visual">Stage All Changes</span></p
+            >
+          </div>
+
+          <div class="step">
+            <span class="step-number">2</span>
+            <h3>კომიტის შეტყობინების დაწერა</h3>
+            <p>შეიყვანეთ აღწერილობითი შეტყობინება Message ველში</p>
+            <div class="code-block"> მაგალითი: "დავამატე ახალი ფუნქციონალი მომხმარებლის ავტორიზაციისთვის" </div>
+          </div>
+
+          <div class="step">
+            <span class="step-number">3</span>
+            <h3>კომიტის შესრულება</h3>
+            <p
+              >დააჭირეთ <span class="button-visual">✓ Commit</span> ღილაკს ან <span class="keyboard-key">Ctrl</span> +
+              <span class="keyboard-key">Enter</span></p
+            >
+            <div class="tip">
+              <p>კარგი პრაქტიკაა ხშირი და მცირე კომიტების გაკეთება დიდი ცვლილებების ნაცვლად</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ცვლილებების სინქრონიზაცია -->
+        <div class="section">
+          <h2>ცვლილებების სინქრონიზაცია Branch-თან</h2>
+
+          <div class="step">
+            <span class="step-number">1</span>
+            <h3>GitHub-თან დაკავშირება</h3>
+            <p>პირველად დააჭირეთ <span class="button-visual">Publish Branch</span> ღილაკს</p>
+            <p>აირჩიეთ GitHub რეპოზიტორი და დაადასტურეთ ავტორიზაცია</p>
+          </div>
+
+          <div class="step">
+            <span class="step-number">2</span>
+            <h3>ცვლილებების Push</h3>
+            <p>კომიტების შემდეგ დააჭირეთ <span class="button-visual">Sync Changes</span> ღილაკს</p>
+            <div class="warning">
+              <p>დარწმუნდით, რომ ყველა ლოკალური ცვლილება დაკომიტებულია Push-ის წინ</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <span class="step-number">3</span>
+            <h3>ცვლილებების Pull</h3>
+            <p>სხვების ცვლილებების მისაღებად გამოიყენეთ იგივე <span class="button-visual">Sync Changes</span> ღილაკი</p>
+          </div>
+        </div>
+
+        <!-- ახალი Branch-ის შექმნა -->
+        <div class="section">
+          <h2>ახალი Branch-ის შექმნა</h2>
+
+          <div class="step">
+            <span class="step-number">1</span>
+            <h3>Branch პანელის გახსნა</h3>
+            <p>ქვედა მარცხენა კუთხეში დააჭირეთ Branch-ის სახელს</p>
+          </div>
+
+          <div class="step">
+            <span class="step-number">2</span>
+            <h3>ახალი Branch-ის შექმნა</h3>
+            <p>აირჩიეთ <span class="button-visual">Create new branch</span></p>
+            <p>შეიყვანეთ Branch-ის სახელი და დააჭირეთ Enter</p>
+            <div class="code-block"> მაგალითი: feature/user-authentication </div>
+          </div>
+
+          <div class="step">
+            <span class="step-number">3</span>
+            <h3>Branch-ზე გადართვა</h3>
+            <p>ავტომატურად გადაერთვებით ახალ Branch-ზე</p>
+            <div class="tip">
+              <p>შეგიძლიათ ნებისმიერ დროს გადაერთოთ Branch-ებს შორის იგივე მენიუდან</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pull Request-ის შექმნა -->
+        <div class="section">
+          <h2>Pull Request-ის შექმნა</h2>
+
+          <div class="step">
+            <span class="step-number">1</span>
+            <h3>GitHub Pull Requests პანელის გახსნა</h3>
+            <p>მარცხენა პანელში დააჭირეთ GitHub ხატულას</p>
+            <p>დარწმუნდით, რომ დაინსტალირებული გაქვთ "GitHub Pull Requests and Issues" გაფართოება</p>
+          </div>
+
+          <div class="step">
+            <span class="step-number">2</span>
+            <h3>Pull Request-ის დაწყება</h3>
+            <p>დააჭირეთ <span class="button-visual">Create Pull Request</span> ღილაკს</p>
+            <p>აირჩიეთ base branch (ჩვეულებრივ main) და compare branch (თქვენი feature branch)</p>
+          </div>
+
+          <div class="step">
+            <span class="step-number">3</span>
+            <h3>PR-ის დეტალების შევსება</h3>
+            <p>დაამატეთ სათაური და აღწერა თქვენს Pull Request-ს</p>
+            <div class="code-block">
+              სათაური: "ახალი ფუნქცია: მომხმარებლის ავტორიზაცია" აღწერა: "დავამატე ავტორიზაციის სისტემა JWT ტოკენების
+              გამოყენებით..."
+            </div>
+          </div>
+
+          <div class="step">
+            <span class="step-number">4</span>
+            <h3>PR-ის გაგზავნა</h3>
+            <p>დააჭირეთ <span class="button-visual">Create</span> ღილაკს PR-ის შესაქმნელად</p>
+            <div class="tip">
+              <p>შეგიძლიათ დაამატოთ რევიუერები და ლეიბლები PR-ის შექმნის შემდეგ</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <span class="step-number">5</span>
+            <h3>PR-ის მართვა</h3>
+            <p>შეგიძლიათ ნახოთ და მართოთ თქვენი PR-ები პირდაპირ VS Code-იდან</p>
+            <p>კომენტარების დამატება, რევიუს მოთხოვნა და merge-ის შესრულება შესაძლებელია გაფართოებიდან</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

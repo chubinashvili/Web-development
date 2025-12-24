@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid - ძირითადი თვისებების ტუტორიალი</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+        }
+
+        h2 {
+            color: #495057;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: inline-block;
+        }
+
+        .grid-demo {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .grid-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .property {
+            color: #fbbf24;
+        }
+
+        .value {
+            color: #34d399;
+        }
+
+        .tip {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .tip strong {
+            color: #d97706;
+        }
+
+        /* Demo 1: Basic Grid */
+        .demo1 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Demo 2: Different Column Sizes */
+        .demo2 {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Demo 3: Rows and Columns */
+        .demo3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 100px 150px;
+            gap: 15px;
+        }
+
+        /* Demo 4: Grid Areas */
+        .demo4 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 80px 200px 80px;
+            grid-template-areas: 
+                "header header header"
+                "sidebar main main"
+                "footer footer footer";
+            gap: 15px;
+        }
+
+        .header { grid-area: header; background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .sidebar { grid-area: sidebar; background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .main { grid-area: main; background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .footer { grid-area: footer; background: linear-gradient(135deg, #fa709a, #fee140); }
+
+        /* Demo 5: Auto-fit/Auto-fill */
+        .demo5 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        /* Demo 6: Alignment */
+        .demo6 {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 15px;
+            height: 200px;
+            justify-content: center;
+            align-content: center;
+            background: #e9ecef;
+            border-radius: 10px;
+        }
+
+        /* Demo 7: Item Placement */
+        .demo7 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 80px);
+            gap: 15px;
+        }
+
+        .span-item {
+            grid-column: span 2;
+            grid-row: span 2;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        /* Interactive Demo */
+        .interactive-section {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .control-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .control-group select,
+        .control-group input {
+            padding: 8px;
+            border: 2px solid #dee2e6;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        #interactive-grid {
+            display: grid;
+            min-height: 300px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .interactive-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .cheatsheet {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .cheat-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+
+        .cheat-item h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .cheat-item code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #e83e8c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 CSS Grid-ის საფუძვლები</h1>
+        <p class="subtitle">დაეუფლეთ ყველაზე მეტად გამოყენებულ Grid თვისებებს ყოველდღიური განლაგებისთვის</p>
+
+        <!-- Section 1: Basic Grid Setup -->
+        <div class="section">
+            <h2>1. ძირითადი Grid კონტეინერი</h2>
+            <p>CSS Grid-ის საფუძველი - ელემენტის Grid კონტეინერად გარდაქმნა.</p>
+            
+            <div class="code-block">
+                <span class="property">display</span>: <span class="value">grid</span>;<br>
+                <span class="property">grid-template-columns</span>: <span class="value">1fr 1fr 1fr</span>;<br>
+                <span class="property">gap</span>: <span class="value">15px</span>;
+            </div>
+
+            <div class="grid-demo demo1">
+                <div class="grid-item">1</div>
+                <div class="grid-item">2</div>
+                <div class="grid-item">3</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">5</div>
+                <div class="grid-item">6</div>
+            </div>
+
+            <div class="tip">
+                <strong>💡 რჩევა:</strong> "fr" ნიშნავს "წილად" - ის ანაწილებს ხელმისაწვდომ სივრცეს პროპორციულად. 
+                1fr 1fr 1fr ქმნის 3 თანაბარ სვეტს.
+            </div>
+        </div>
+
+        <!-- Section 2: Column Sizing -->
+        <div class="section">
+            <h2>2. სხვადასხვა ზომის სვეტები</h2>
+            <p>განსხვავებული ერთეულების შერევა: fr, px, %, auto - მოქნილი განლაგებისთვის.</p>
+            
+            <div class="code-block">
+                <span class="property">grid-template-columns</span>: <span class="value">2fr 1fr 1fr</span>;<br>
+                <span class="comment">/* პირველი სვეტი იკავებს დანარჩენების 2-ჯერ მეტ ადგილს */</span>
+            </div>
+
+            <div class="grid-demo demo2">
+                <div class="grid-item">Wide (2fr)</div>
+                <div class="grid-item">Normal (1fr)</div>
+                <div class="grid-item">Normal (1fr)</div>
+            </div>
+
+            <div class="tip">
+                <strong>💡 ხშირი შაბლონები:</strong><br>
+                • გვერდითი პანელის განლაგება: 250px 1fr<br>
+                • სამსვეტიანი: 1fr 2fr 1fr<br>
+                • ფიქსირებული + მოქნილი: 200px 1fr 200px
+            </div>
+        </div>
+
+        <!-- Section 3: Rows and Columns -->
+        <div class="section">
+            <h2>3. რიგების განსაზღვრა და Repeat-ის გამოყენება</h2>
+            <p>ორივე განზომილების კონტროლი და repeat() ფუნქციის გამოყენება უფრო სუფთა კოდისთვის.</p>
+            
+            <div class="code-block">
+                <span class="property">grid-template-columns</span>: <span class="value">repeat(3, 1fr)</span>;<br>
+                <span class="property">grid-template-rows</span>: <span class="value">100px 150px</span>;<br>
+                <span class="property">gap</span>: <span class="value">15px</span>;
+            </div>
+
+            <div class="grid-demo demo3">
+                <div class="grid-item">1</div>
+                <div class="grid-item">2</div>
+                <div class="grid-item">3</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">5</div>
+                <div class="grid-item">6</div>
+            </div>
+        </div>
+
+        <!-- Section 4: Grid Areas -->
+        <div class="section">
+            <h2>4. Grid შაბლონის არეები (დასახელებული რეგიონები)</h2>
+            <p>შექმენით სემანტიკური განლაგებები დასახელებული არეებით - იდეალურია გვერდის განლაგებისთვის!</p>
+            
+            <div class="code-block">
+                <span class="property">grid-template-areas</span>:<br>
+                <span class="value">  "header header header"</span><br>
+                <span class="value">  "sidebar main main"</span><br>
+                <span class="value">  "footer footer footer"</span>;<br><br>
+                <span class="comment">/* შემდეგ შვილ ელემენტებში: */</span><br>
+                <span class="property">grid-area</span>: <span class="value">header</span>;
+            </div>
+
+            <div class="grid-demo demo4">
+                <div class="grid-item header">Header</div>
+                <div class="grid-item sidebar">Sidebar</div>
+                <div class="grid-item main">Main Content</div>
+                <div class="grid-item footer">Footer</div>
+            </div>
+
+            <div class="tip">
+                <strong>💡 პროფესიონალური რჩევა:</strong> Grid არეები ადაპტირებულ დიზაინს ადვილს ხდის - უბრალოდ ხელახლა განსაზღვრეთ არეები media queries-ში!
+            </div>
+        </div>
+
+        <!-- Section 5: Auto-fit/Auto-fill -->
+        <div class="section">
+            <h2>5. ადაპტირებული Grid-ები Auto-fit-თან ერთად</h2>
+            <p>შექმენით ადაპტირებული Grid-ები media queries-ის გარეშე!</p>
+            
+            <div class="code-block">
+                <span class="property">grid-template-columns</span>: <span class="value">repeat(auto-fit, minmax(150px, 1fr))</span>;<br>
+                <span class="comment">/* ელემენტები ავტომატურად ეწყობა, როცა ადგილი ნაკლებია */</span>
+            </div>
+
+            <div class="grid-demo demo5">
+                <div class="grid-item">1</div>
+                <div class="grid-item">2</div>
+                <div class="grid-item">3</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">5</div>
+            </div>
+
+            <div class="tip">
+                <strong>💡 auto-fit vs auto-fill:</strong><br>
+                • auto-fit: ელემენტებს ავრცელებს კონტეინერის შესავსებად<br>
+                • auto-fill: ინარჩუნებს ელემენტის ზომას, ტოვებს ცარიელ სივრცეს
+            </div>
+        </div>
+
+        <!-- Section 6: Alignment -->
+        <div class="section">
+            <h2>6. განლაგების თვისებები</h2>
+            <p>თქვენი Grid-ის და ელემენტების სრულყოფილი ცენტრირება და განლაგება.</p>
+            
+            <div class="code-block">
+                <span class="property">justify-content</span>: <span class="value">center</span>; <span class="comment">/* ჰორიზონტალური განლაგება */</span><br>
+                <span class="property">align-content</span>: <span class="value">center</span>; <span class="comment">/* ვერტიკალური განლაგება */</span><br>
+                <span class="property">justify-items</span>: <span class="value">stretch</span>; <span class="comment">/* ელემენტები უჯრედებში */</span><br>
+                <span class="property">align-items</span>: <span class="value">stretch</span>; <span class="comment">/* ელემენტები უჯრედებში */</span>
+            </div>
+
+            <div class="grid-demo demo6">
+                <div class="grid-item">1</div>
+                <div class="grid-item">2</div>
+                <div class="grid-item">3</div>
+            </div>
+        </div>
+
+        <!-- Section 7: Item Placement -->
+        <div class="section">
+            <h2>7. ელემენტების გავრცელება და განთავსება</h2>
+            <p>ელემენტების რამდენიმე რიგი/სვეტზე გავრცელება.</p>
+            
+            <div class="code-block">
+                <span class="property">grid-column</span>: <span class="value">span 2</span>; <span class="comment">/* 2 სვეტზე გავრცელება */</span><br>
+                <span class="property">grid-row</span>: <span class="value">span 2</span>; <span class="comment">/* 2 რიგზე გავრცელება */</span><br>
+                <span class="comment">/* ან გამოიყენეთ ხაზის ნომრები: */</span><br>
+                <span class="property">grid-column</span>: <span class="value">1 / 3</span>; <span class="comment">/* 1-ე ხაზიდან მე-3-მდე */</span>
+            </div>
+
+            <div class="grid-demo demo7">
+                <div class="grid-item span-item">Spans 2x2</div>
+                <div class="grid-item">1</div>
+                <div class="grid-item">2</div>
+                <div class="grid-item">3</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">5</div>
+            </div>
+        </div>
+
+        <!-- Interactive Demo -->
+        <div class="interactive-section">
+            <h2>🎮 ინტერაქტიული სანამუშო არე</h2>
+            <p>სცადეთ ამ თვისებების შეცვლა და ნახეთ შედეგები მაშინვე!</p>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="columns">grid-template-columns:</label>
+                    <select id="columns" onchange="updateGrid()">
+                        <option value="1fr 1fr 1fr">1fr 1fr 1fr</option>
+                        <option value="repeat(4, 1fr)">repeat(4, 1fr)</option>
+                        <option value="2fr 1fr 1fr">2fr 1fr 1fr</option>
+                        <option value="200px 1fr 200px">200px 1fr 200px</option>
+                        <option value="repeat(auto-fit, minmax(150px, 1fr))">auto-fit, minmax(150px, 1fr)</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="gap">gap:</label>
+                    <select id="gap" onchange="updateGrid()">
+                        <option value="10px">10px</option>
+                        <option value="20px">20px</option>
+                        <option value="30px">30px</option>
+                        <option value="5px 20px">5px 20px (row column)</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="justify">justify-content:</label>
+                    <select id="justify" onchange="updateGrid()">
+                        <option value="start">start</option>
+                        <option value="center">center</option>
+                        <option value="end">end</option>
+                        <option value="space-between">space-between</option>
+                        <option value="space-around">space-around</option>
+                        <option value="stretch">stretch</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="align">align-content:</label>
+                    <select id="align" onchange="updateGrid()">
+                        <option value="start">start</option>
+                        <option value="center">center</option>
+                        <option value="end">end</option>
+                        <option value="space-between">space-between</option>
+                        <option value="stretch">stretch</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="rows">grid-template-rows:</label>
+                    <input type="text" id="rows" value="auto" onchange="updateGrid()" placeholder="e.g., 100px 100px">
+                </div>
+
+                <div class="control-group">
+                    <label for="items">Number of items:</label>
+                    <input type="number" id="items" value="6" min="1" max="12" onchange="updateGrid()">
+                </div>
+            </div>
+
+            <div id="interactive-grid">
+                <div class="interactive-item">1</div>
+                <div class="interactive-item">2</div>
+                <div class="interactive-item">3</div>
+                <div class="interactive-item">4</div>
+                <div class="interactive-item">5</div>
+                <div class="interactive-item">6</div>
+            </div>
+
+            <div class="code-block" id="current-code">
+                <span class="property">display</span>: <span class="value">grid</span>;<br>
+                <span class="property">grid-template-columns</span>: <span class="value">1fr 1fr 1fr</span>;<br>
+                <span class="property">gap</span>: <span class="value">10px</span>;
+            </div>
+        </div>
+
+        <!-- Quick Reference -->
+        <div class="section">
+            <h2>📋 სწრაფი მიმოხილვის სახელმძღვანელო</h2>
+            
+            <div class="cheatsheet">
+                <div class="cheat-item">
+                    <h3>კონტეინერის თვისებები</h3>
+                    <p><code>display: grid;</code> - Grid კონტეინერის შექმნა</p>
+                    <p><code>grid-template-columns</code> - სვეტების განსაზღვრა</p>
+                    <p><code>grid-template-rows</code> - რიგების განსაზღვრა</p>
+                    <p><code>grid-template-areas</code> - დასახელებული არეები</p>
+                    <p><code>gap / grid-gap</code> - ელემენტებს შორის სივრცე</p>
+                </div>
+
+                <div class="cheat-item">
+                    <h3>განლაგება (კონტეინერი)</h3>
+                    <p><code>justify-content</code> - Grid-ის ჰორიზონტალური განლაგება</p>
+                    <p><code>align-content</code> - Grid-ის ვერტიკალური განლაგება</p>
+                    <p><code>justify-items</code> - ელემენტების ჰორიზონტალური განლაგება</p>
+                    <p><code>align-items</code> - ელემენტების ვერტიკალური განლაგება</p>
+                    <p><code>place-content</code> - ორივეს მოკლე ფორმა</p>
+                </div>
+
+                <div class="cheat-item">
+                    <h3>ელემენტის თვისებები</h3>
+                    <p><code>grid-column</code> - სვეტის პოზიცია/გავრცელება</p>
+                    <p><code>grid-row</code> - რიგის პოზიცია/გავრცელება</p>
+                    <p><code>grid-area</code> - დასახელებული არე ან მოკლე ფორმა</p>
+                    <p><code>justify-self</code> - საკუთარი ჰორიზონტალური განლაგება</p>
+                    <p><code>align-self</code> - საკუთარი ვერტიკალური განლაგება</p>
+                </div>
+
+                <div class="cheat-item">
+                    <h3>სასარგებლო მნიშვნელობები</h3>
+                    <p><code>fr</code> - წილადის ერთეული</p>
+                    <p><code>repeat()</code> - განმეორების შაბლონი</p>
+                    <p><code>minmax()</code> - მინიმალური და მაქსიმალური ზომა</p>
+                    <p><code>auto-fit</code> - ხელმისაწვდომ სვეტებში ჩატევა</p>
+                    <p><code>span X</code> - X სვეტი/რიგის გავრცელება</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip" style="margin-top: 40px; background: #e0f2fe; border-left-color: #0284c7;">
+            <strong>🎯 ყოველდღიური გამოყენების რეზიუმე:</strong><br>
+            თქვენი Grid განლაგებების 90% გამოიყენებს ამ თვისებებს:<br>
+            • <code>display: grid</code> + <code>grid-template-columns</code> + <code>gap</code> (ძირითადი კონფიგურაცია)<br>
+            • <code>repeat(auto-fit, minmax(X, 1fr))</code> (ადაპტირებული ბარათები)<br>
+            • <code>grid-area</code> ან <code>grid-column/row: span X</code> (სპეციალური განლაგებები)<br>
+            • <code>justify-content/align-content: center</code> (ცენტრირება)
+        </div>
+    </div>
+
+    <script>
+        function updateGrid() {
+            const grid = document.getElementById('interactive-grid');
+            const columns = document.getElementById('columns').value;
+            const gap = document.getElementById('gap').value;
+            const justify = document.getElementById('justify').value;
+            const align = document.getElementById('align').value;
+            const rows = document.getElementById('rows').value;
+            const itemCount = document.getElementById('items').value;
+            
+            // Update grid styles
+            grid.style.gridTemplateColumns = columns;
+            grid.style.gap = gap;
+            grid.style.justifyContent = justify;
+            grid.style.alignContent = align;
+            if (rows && rows !== 'auto') {
+                grid.style.gridTemplateRows = rows;
+            } else {
+                grid.style.gridTemplateRows = '';
+            }
+            
+            // Update items
+            grid.innerHTML = '';
+            for (let i = 1; i <= itemCount; i++) {
+                const item = document.createElement('div');
+                item.className = 'interactive-item';
+                item.textContent = i;
+                grid.appendChild(item);
+            }
+            
+            // Update code display
+            const codeBlock = document.getElementById('current-code');
+            let codeHTML = `<span class="property">display</span>: <span class="value">grid</span>;<br>`;
+            codeHTML += `<span class="property">grid-template-columns</span>: <span class="value">${columns}</span>;<br>`;
+            if (rows && rows !== 'auto') {
+                codeHTML += `<span class="property">grid-template-rows</span>: <span class="value">${rows}</span>;<br>`;
+            }
+            codeHTML += `<span class="property">gap</span>: <span class="value">${gap}</span>;<br>`;
+            codeHTML += `<span class="property">justify-content</span>: <span class="value">${justify}</span>;<br>`;
+            codeHTML += `<span class="property">align-content</span>: <span class="value">${align}</span>;`;
+            
+            codeBlock.innerHTML = codeHTML;
+        }
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.grid-item, .interactive-item').forEach(item => {
+            item.style.transition = 'transform 0.2s';
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(0.95)';
+            });
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

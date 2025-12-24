@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beautiful CSS Table Styles - Examples</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: white;
+        margin-bottom: 50px;
+        font-size: 2.5em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      h2 {
+        color: white;
+        margin: 40px 0 20px;
+        font-size: 1.5em;
+      }
+
+      /* Style 1: Modern Minimal */
+      .minimal-table {
+        width: 100%;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        margin-bottom: 40px;
+      }
+
+      .minimal-table thead {
+        background: #4a90e2;
+        color: white;
+      }
+
+      .minimal-table th,
+      .minimal-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .minimal-table tbody tr:hover {
+        background: #f5f5f5;
+        transition: background 0.3s;
+      }
+
+      .minimal-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      /* Style 2: Gradient Style */
+      .gradient-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin-bottom: 40px;
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      }
+
+      .gradient-table thead {
+        background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+      }
+
+      .gradient-table th {
+        padding: 20px 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 14px;
+      }
+
+      .gradient-table td {
+        padding: 15px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .gradient-table tbody tr {
+        transition: all 0.3s;
+      }
+
+      .gradient-table tbody tr:hover {
+        background: linear-gradient(90deg, #ffeaa7 0%, #fdcb6e 100%);
+        transform: scale(1.02);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Style 3: Dark Theme */
+      .dark-table {
+        width: 100%;
+        background: #2c3e50;
+        color: #ecf0f1;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .dark-table thead {
+        background: #1a252f;
+      }
+
+      .dark-table th {
+        padding: 18px 15px;
+        text-align: left;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 3px solid #3498db;
+      }
+
+      .dark-table td {
+        padding: 15px;
+        border-bottom: 1px solid #34495e;
+      }
+
+      .dark-table tbody tr:hover {
+        background: #34495e;
+        cursor: pointer;
+      }
+
+      .dark-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      /* Style 4: Striped and Bordered */
+      .striped-table {
+        width: 100%;
+        background: white;
+        border: 2px solid #3498db;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 40px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .striped-table thead {
+        background: #3498db;
+        color: white;
+      }
+
+      .striped-table th,
+      .striped-table td {
+        padding: 12px 15px;
+        text-align: center;
+        border-right: 1px solid #e0e0e0;
+      }
+
+      .striped-table th:last-child,
+      .striped-table td:last-child {
+        border-right: none;
+      }
+
+      .striped-table tbody tr:nth-child(even) {
+        background: #ecf0f1;
+      }
+
+      .striped-table tbody tr:hover {
+        background: #bdc3c7;
+        transition: background 0.3s;
+      }
+
+      /* Style 5: Card Style */
+      .card-table {
+        width: 100%;
+        background: transparent;
+        border-collapse: separate;
+        border-spacing: 0 15px;
+        margin-bottom: 40px;
+      }
+
+      .card-table thead th {
+        background: none;
+        color: white;
+        padding: 10px 15px;
+        text-align: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .card-table tbody tr {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .card-table tbody tr:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .card-table td {
+        padding: 20px 15px;
+        border: none;
+      }
+
+      .card-table td:first-child {
+        border-radius: 10px 0 0 10px;
+        font-weight: bold;
+        color: #2c3e50;
+      }
+
+      .card-table td:last-child {
+        border-radius: 0 10px 10px 0;
+      }
+
+      /* Style 6: Neon Glow */
+      .neon-table {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        border: 2px solid #00ff88;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 40px;
+        box-shadow: 0 0 20px #00ff88;
+      }
+
+      .neon-table thead {
+        background: rgba(0, 255, 136, 0.1);
+      }
+
+      .neon-table th {
+        padding: 15px;
+        color: #00ff88;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: bold;
+        border-bottom: 2px solid #00ff88;
+        text-shadow: 0 0 10px #00ff88;
+      }
+
+      .neon-table td {
+        padding: 15px;
+        color: #ffffff;
+        border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+      }
+
+      .neon-table tbody tr:hover {
+        background: rgba(0, 255, 136, 0.1);
+        box-shadow: inset 0 0 20px rgba(0, 255, 136, 0.2);
+      }
+
+      /* Responsive Design */
+      @media screen and (max-width: 768px) {
+        body {
+          padding: 20px 10px;
+        }
+
+        h1 {
+          font-size: 1.8em;
+        }
+
+        table {
+          font-size: 14px;
+        }
+
+        th,
+        td {
+          padding: 10px 8px !important;
+        }
+      }
+
+      /* Special Effects */
+      .status-active {
+        background: #27ae60;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .status-pending {
+        background: #f39c12;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .status-inactive {
+        background: #e74c3c;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 20px;
+        background: #ecf0f1;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #3498db, #2ecc71);
+        border-radius: 10px;
+        transition: width 1s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <table class="minimal-table">
+        <thead>
+          <tr>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Department</th>
+            <th>Salary</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>001</td>
+            <td>John Doe</td>
+            <td>Software Engineer</td>
+            <td>Development</td>
+            <td>$85,000</td>
+          </tr>
+          <tr>
+            <td>002</td>
+            <td>Jane Smith</td>
+            <td>Product Manager</td>
+            <td>Product</td>
+            <td>$95,000</td>
+          </tr>
+          <tr>
+            <td>003</td>
+            <td>Mike Johnson</td>
+            <td>UI Designer</td>
+            <td>Design</td>
+            <td>$75,000</td>
+          </tr>
+          <tr>
+            <td>004</td>
+            <td>Sarah Williams</td>
+            <td>Data Analyst</td>
+            <td>Analytics</td>
+            <td>$70,000</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="striped-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Stock</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Laptop Pro</td>
+            <td>Electronics</td>
+            <td>45</td>
+            <td>$1,299</td>
+            <td>📦 Order</td>
+          </tr>
+          <tr>
+            <td>Wireless Mouse</td>
+            <td>Accessories</td>
+            <td>120</td>
+            <td>$29</td>
+            <td>📦 Order</td>
+          </tr>
+          <tr>
+            <td>USB-C Cable</td>
+            <td>Accessories</td>
+            <td>200</td>
+            <td>$15</td>
+            <td>📦 Order</td>
+          </tr>
+          <tr>
+            <td>Monitor 4K</td>
+            <td>Electronics</td>
+            <td>23</td>
+            <td>$599</td>
+            <td>📦 Order</td>
+          </tr>
+          <tr>
+            <td>Mechanical Keyboard</td>
+            <td>Accessories</td>
+            <td>67</td>
+            <td>$149</td>
+            <td>📦 Order</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="card-table">
+        <thead>
+          <tr>
+            <th>Team Member</th>
+            <th>Role</th>
+            <th>Projects</th>
+            <th>Performance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Alice Cooper</td>
+            <td>Lead Developer</td>
+            <td>8 Projects</td>
+            <td>⭐⭐⭐⭐⭐</td>
+          </tr>
+          <tr>
+            <td>Bob Martin</td>
+            <td>Designer</td>
+            <td>12 Projects</td>
+            <td>⭐⭐⭐⭐</td>
+          </tr>
+          <tr>
+            <td>Charlie Brown</td>
+            <td>QA Engineer</td>
+            <td>15 Projects</td>
+            <td>⭐⭐⭐⭐⭐</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

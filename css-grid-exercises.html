@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid - პრაქტიკული სავარჯიშოები</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .exercise {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .instructions h3 {
+            color: #495057;
+            margin-bottom: 10px;
+        }
+
+        .instructions ul {
+            margin-left: 20px;
+            color: #666;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+
+        .workspace {
+            border: 2px dashed #dee2e6;
+            padding: 20px;
+            border-radius: 10px;
+            min-height: 300px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        button.reset {
+            background: #6c757d;
+        }
+
+        .code-hint {
+            background: #2d3748;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            display: none;
+        }
+
+        .code-hint.show {
+            display: block;
+        }
+
+        /* სავარჯიშო 1: ფოტო გალერეა */
+        .photo-gallery {
+            /* სტუდენტები აქ დაამატებენ grid კოდს */
+        }
+
+        .photo {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 8px;
+            min-height: 150px;
+        }
+
+        .photo:nth-child(1) { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .photo:nth-child(2) { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .photo:nth-child(3) { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .photo:nth-child(4) { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .photo:nth-child(5) { background: linear-gradient(135deg, #30cfd0, #330867); }
+        .photo:nth-child(6) { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+        .photo:nth-child(7) { background: linear-gradient(135deg, #ff9a9e, #fecfef); }
+        .photo:nth-child(8) { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+        .photo:nth-child(9) { background: linear-gradient(135deg, #ff6e7f, #bfe9ff); }
+
+        /* სავარჯიშო 2: ბლოგის განლაგება - შაბლონი */
+        .blog-layout {
+            /* სტუდენტები აქ დაამატებენ grid კოდს */
+        }
+
+        .blog-header {
+            background: #2d3748;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .blog-nav {
+            background: #4a5568;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .blog-main {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 200px;
+        }
+
+        .blog-sidebar {
+            background: #cbd5e0;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .blog-footer {
+            background: #2d3748;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        /* სავარჯიშო 3: დაკმის პანელი */
+        .dashboard {
+            /* სტუდენტები აქ დაამატებენ grid კოდს */
+        }
+
+        .widget {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .widget-large {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            min-height: 200px;
+        }
+
+        .widget-chart {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+            color: white;
+        }
+
+        /* სავარჯიშო 4: ბარათების განლაგება */
+        .card-container {
+            /* სტუდენტები აქ დაამატებენ grid კოდს */
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .card-image {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* ამოხსნის სტილები (ნაგულისხმევად დამალული) */
+        .solution {
+            display: none;
+        }
+
+        .solution.active {
+            display: block;
+        }
+
+        /* წარმატების შეტყობინება */
+        .success-message {
+            background: #10b981;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* რესპონსივი მინიშნება */
+        @media (max-width: 768px) {
+            .instructions {
+                padding: 15px;
+            }
+            
+            .exercise {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 CSS Grid პრაქტიკული სავარჯიშოები</h1>
+        <p style="font-size: 1.2em; margin-top: 10px;">ივარჯიშეთ რეალური განლაგებების შექმნაში!</p>
+    </div>
+
+    <!-- სავარჯიშო 1: ფოტო გალერეა -->
+    <div class="exercise">
+        <h2>სავარჯიშო 1: რესპონსივი ფოტო გალერეა</h2>
+        
+        <div class="instructions">
+            <h3>📋 თქვენი ამოცანა:</h3>
+            <p>შექმენით რესპონსივი ფოტო გალერეა CSS Grid-ის გამოყენებით.</p>
+            <ul>
+                <li>გაითვალისწინეთ რესპონსივობა (3 სვეტი დესკტოპზე, 2 ტაბლეტზე, 1 მობილურზე)</li>
+                <li>დაამატეთ 20px ინტერვალი ფოტოებს შორის</li>
+                <li>გამოიყენეთ auto-fit minmax(200px, 1fr)-თან ერთად</li>
+                <li>გახადეთ მე-5 ფოტო 2 სვეტზე გადაშლილი</li>
+            </ul>
+        </div>
+
+        <div class="workspace">
+            <div class="photo-gallery" id="gallery">
+                <div class="photo">📷 1</div>
+                <div class="photo">📷 2</div>
+                <div class="photo">📷 3</div>
+                <div class="photo">📷 4</div>
+                <div class="photo" style="grid-column: span 2;">📷 Featured</div>
+                <div class="photo">📷 6</div>
+                <div class="photo">📷 7</div>
+                <div class="photo">📷 8</div>
+                <div class="photo">📷 9</div>
+            </div>
+        </div>
+
+        <button onclick="applyGalleryGrid()">გამოიყენეთ ამოხსნა</button>
+        <button class="reset" onclick="resetGallery()">გაწმენდა</button>
+        <button onclick="toggleHint('hint1')">მინიშნების ჩვენება</button>
+
+        <div class="code-hint" id="hint1">
+            .photo-gallery {<br>
+            &nbsp;&nbsp;display: grid;<br>
+            &nbsp;&nbsp;grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));<br>
+            &nbsp;&nbsp;gap: 20px;<br>
+            }<br><br>
+            .photo:nth-child(5) {<br>
+            &nbsp;&nbsp;grid-column: span 2;<br>
+            }
+        </div>
+    </div>
+
+    <!-- სავარჯიშო 2: ბლოგის განლაგება -->
+    <div class="exercise">
+        <h2>სავარჯიშო 2: კლასიკური ბლოგის განლაგება</h2>
+        
+        <div class="instructions">
+            <h3>📋 თქვენი ამოცანა:</h3>
+            <p>შექმენით ტიპური ბლოგის განლაგება header-ით, nav-ით, მთავარი კონტენტით, sidebar-ით და footer-ით.</p>
+            <ul>
+                <li>Header-ი უნდა იყოს სრული სიგანის ზემოთ</li>
+                <li>ნავიგაცია header-ის ქვემოთ, ასევე სრული სიგანის</li>
+                <li>მთავარი კონტენტი იკავებს ადგილის 2/3-ს, sidebar-ი 1/3-ს</li>
+                <li>Footer-ი სრულ სიგანეზე ყველაზე ქვემოთ</li>
+                <li>15px ინტერვალი ყველა სექციას შორის</li>
+            </ul>
+        </div>
+
+        <div class="workspace">
+            <div class="blog-layout" id="blog">
+                <div class="blog-header">Header</div>
+                <div class="blog-nav">Navigation</div>
+                <div class="blog-main">Main Content Area</div>
+                <div class="blog-sidebar">Sidebar</div>
+                <div class="blog-footer">Footer</div>
+            </div>
+        </div>
+
+        <button onclick="applyBlogGrid()">გამოიყენეთ ამოხსნა</button>
+        <button class="reset" onclick="resetBlog()">გაწმენდა</button>
+        <button onclick="toggleHint('hint2')">მინიშნების ჩვენება</button>
+
+        <div class="code-hint" id="hint2">
+            .blog-layout {<br>
+            &nbsp;&nbsp;display: grid;<br>
+            &nbsp;&nbsp;grid-template-columns: 2fr 1fr;<br>
+            &nbsp;&nbsp;grid-template-areas:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"header header"<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"nav nav"<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"main sidebar"<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;"footer footer";<br>
+            &nbsp;&nbsp;gap: 15px;<br>
+            }<br><br>
+            .blog-header { grid-area: header; }<br>
+            .blog-nav { grid-area: nav; }<br>
+            .blog-main { grid-area: main; }<br>
+            .blog-sidebar { grid-area: sidebar; }<br>
+            .blog-footer { grid-area: footer; }
+        </div>
+    </div>
+
+    <!-- სავარჯიშო 3: დაკმის პანელი -->
+    <div class="exercise">
+        <h2>სავარჯიშო 3: ადმინისტრაციული დაკმის პანელი</h2>
+        
+        <div class="instructions">
+            <h3>📋 თქვენი ამოცანა:</h3>
+            <p>შექმენით დაკმის პანელი სხვადასხვა ზომის ვიჯეტებით.</p>
+            <ul>
+                <li>შექმენით 4-სვეტიანი ბადე</li>
+                <li>პატარა ვიჯეტები: თითო სვეტი თითოეულისთვის (4 სულ პირველ მწკრივში)</li>
+                <li>დიდი ვიჯეტი: 2 სვეტსა და 2 მწკრივზე გაშლილი</li>
+                <li>გრაფიკის ვიჯეტი: 2 სვეტზე ჰორიზონტალურად გაშლილი</li>
+                <li>20px ინტერვალი ვიჯეტებს შორის</li>
+            </ul>
+        </div>
+
+        <div class="workspace">
+            <div class="dashboard" id="dashboard">
+                <div class="widget">Widget 1</div>
+                <div class="widget">Widget 2</div>
+                <div class="widget">Widget 3</div>
+                <div class="widget">Widget 4</div>
+                <div class="widget widget-large">Large Widget<br>(2x2)</div>
+                <div class="widget">Widget 5</div>
+                <div class="widget">Widget 6</div>
+                <div class="widget widget-chart">Chart Widget (2 cols)</div>
+            </div>
+        </div>
+
+        <button onclick="applyDashboardGrid()">გამოიყენეთ ამოხსნა</button>
+        <button class="reset" onclick="resetDashboard()">გაწმენდა</button>
+        <button onclick="toggleHint('hint3')">მინიშნების ჩვენება</button>
+
+        <div class="code-hint" id="hint3">
+            .dashboard {<br>
+            &nbsp;&nbsp;display: grid;<br>
+            &nbsp;&nbsp;grid-template-columns: repeat(4, 1fr);<br>
+            &nbsp;&nbsp;gap: 20px;<br>
+            }<br><br>
+            .widget-large {<br>
+            &nbsp;&nbsp;grid-column: span 2;<br>
+            &nbsp;&nbsp;grid-row: span 2;<br>
+            }<br><br>
+            .widget-chart {<br>
+            &nbsp;&nbsp;grid-column: span 2;<br>
+            }
+        </div>
+    </div>
+
+    <!-- სავარჯიშო 4: ბარათების განლაგება -->
+    <div class="exercise">
+        <h2>სავარჯიშო 4: რესპონსივი ბარათების განლაგება</h2>
+        
+        <div class="instructions">
+            <h3>📋 თქვენი ამოცანა:</h3>
+            <p>შექმენით რესპონსივი ბარათების განლაგება, რომელიც ეკრანის ზომას ეადაპტირება.</p>
+            <ul>
+                <li>ბარათების მინიმალური სიგანე უნდა იყოს 250px</li>
+                <li>ბარათები უნდა იზრდებოდნენ ხელმისაწვდომი ადგილის შევსებისთვის</li>
+                <li>გამოიყენეთ auto-fit რესპონსივი ქცევისთვის</li>
+                <li>30px ინტერვალი ბარათებს შორის</li>
+                <li>ცენტრირეთ ბადე, თუ ბარათები არ ავსებენ სიგანეს</li>
+            </ul>
+        </div>
+
+        <div class="workspace">
+            <div class="card-container" id="cards">
+                <div class="card">
+                    <div class="card-image">🎨</div>
+                    <div class="card-content">
+                        <div class="card-title">Card Title 1</div>
+                        <div class="card-text">This is a sample card with some content.</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">🚀</div>
+                    <div class="card-content">
+                        <div class="card-title">Card Title 2</div>
+                        <div class="card-text">Another card with different content here.</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">💡</div>
+                    <div class="card-content">
+                        <div class="card-title">Card Title 3</div>
+                        <div class="card-text">Third card showing the layout flexibility.</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">🎯</div>
+                    <div class="card-content">
+                        <div class="card-title">Card Title 4</div>
+                        <div class="card-text">Fourth card in our responsive grid.</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image">⭐</div>
+                    <div class="card-content">
+                        <div class="card-title">Card Title 5</div>
+                        <div class="card-text">Fifth card demonstrates auto-fit behavior.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="applyCardGrid()">გამოიყენეთ ამოხსნა</button>
+        <button class="reset" onclick="resetCards()">გაწმენდა</button>
+        <button onclick="toggleHint('hint4')">მინიშნების ჩვენება</button>
+
+        <div class="code-hint" id="hint4">
+            .card-container {<br>
+            &nbsp;&nbsp;display: grid;<br>
+            &nbsp;&nbsp;grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));<br>
+            &nbsp;&nbsp;gap: 30px;<br>
+            &nbsp;&nbsp;justify-content: center;<br>
+            }
+        </div>
+    </div>
+
+    <!-- ბონუს გამოწვევა -->
+    <div class="exercise" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+        <h2 style="color: white; border-bottom-color: white;">🏆 ბონუს გამოწვევა: წმინდა გრაალის განლაგება</h2>
+        
+        <div class="instructions" style="background: rgba(255,255,255,0.9);">
+            <h3>📋 საბოლოო ტესტი:</h3>
+            <p>შექმენით ცნობილი "წმინდა გრაალის" განლაგება - კლასიკური ვებ დიზაინის შაბლონი!</p>
+            <ul>
+                <li>Header ზემოთ (სრული სიგანე)</li>
+                <li>Footer ქვემოთ (სრული სიგანე)</li>
+                <li>3 სვეტი შუაში: მარცხენა sidebar (200px), მთავარი კონტენტი (მოქნილი), მარჯვენა sidebar (200px)</li>
+                <li>მთავარი კონტენტის ადგილი უნდა იყოს მინიმუმ 400px სიგანის</li>
+                <li>განლაგება უნდა ავსებდეს მთელ ეკრანის სიმაღლეს</li>
+            </ul>
+            <p><strong>მინიშნება:</strong> დაგჭირდებათ grid-template-rows minmax()-სთან ერთად და min-height თვისება!</p>
+        </div>
+
+        <div id="success-message" class="success-message">
+            🎉 შესანიშნავი მუშაობა! თქვენ დაეუფლეთ CSS Grid-ის განლაგებებს!
+        </div>
+    </div>
+
+    <script>
+        // სავარჯიშო 1: ფოტო გალერეა
+        function applyGalleryGrid() {
+            const gallery = document.getElementById('gallery');
+            gallery.style.display = 'grid';
+            gallery.style.gridTemplateColumns = 'repeat(auto-fit, minmax(200px, 1fr))';
+            gallery.style.gap = '20px';
+            showSuccess();
+        }
+
+        function resetGallery() {
+            const gallery = document.getElementById('gallery');
+            gallery.style = '';
+            hideSuccess();
+        }
+
+        // სავარჯიშო 2: ბლოგის განლაგება
+        function applyBlogGrid() {
+            const blog = document.getElementById('blog');
+            blog.style.display = 'grid';
+            blog.style.gridTemplateColumns = '2fr 1fr';
+            blog.style.gridTemplateAreas = '"header header" "nav nav" "main sidebar" "footer footer"';
+            blog.style.gap = '15px';
+            
+            document.querySelector('.blog-header').style.gridArea = 'header';
+            document.querySelector('.blog-nav').style.gridArea = 'nav';
+            document.querySelector('.blog-main').style.gridArea = 'main';
+            document.querySelector('.blog-sidebar').style.gridArea = 'sidebar';
+            document.querySelector('.blog-footer').style.gridArea = 'footer';
+            showSuccess();
+        }
+
+        function resetBlog() {
+            const blog = document.getElementById('blog');
+            blog.style = '';
+            document.querySelectorAll('.blog-layout > div').forEach(el => {
+                el.style.gridArea = '';
+            });
+            hideSuccess();
+        }
+
+        // სავარჯიშო 3: დაკმის პანელი
+        function applyDashboardGrid() {
+            const dashboard = document.getElementById('dashboard');
+            dashboard.style.display = 'grid';
+            dashboard.style.gridTemplateColumns = 'repeat(4, 1fr)';
+            dashboard.style.gap = '20px';
+            
+            document.querySelector('.widget-large').style.gridColumn = 'span 2';
+            document.querySelector('.widget-large').style.gridRow = 'span 2';
+            document.querySelector('.widget-chart').style.gridColumn = 'span 2';
+            showSuccess();
+        }
+
+        function resetDashboard() {
+            const dashboard = document.getElementById('dashboard');
+            dashboard.style = '';
+            document.querySelectorAll('.dashboard .widget').forEach(el => {
+                el.style.gridColumn = '';
+                el.style.gridRow = '';
+            });
+            hideSuccess();
+        }
+
+        // სავარჯიშო 4: ბარათების განლაგება
+        function applyCardGrid() {
+            const cards = document.getElementById('cards');
+            cards.style.display = 'grid';
+            cards.style.gridTemplateColumns = 'repeat(auto-fit, minmax(250px, 1fr))';
+            cards.style.gap = '30px';
+            cards.style.justifyContent = 'center';
+            showSuccess();
+        }
+
+        function resetCards() {
+            const cards = document.getElementById('cards');
+            cards.style = '';
+            hideSuccess();
+        }
+
+        // მინიშნების ხილვადობის ჩართვა/გამორთვა
+        function toggleHint(hintId) {
+            const hint = document.getElementById(hintId);
+            hint.classList.toggle('show');
+        }
+
+        // წარმატების შეტყობინება
+        function showSuccess() {
+            setTimeout(() => {
+                const successMsg = document.getElementById('success-message');
+                if (successMsg) {
+                    successMsg.classList.add('show');
+                    setTimeout(() => {
+                        successMsg.classList.remove('show');
+                    }, 3000);
+                }
+            }, 500);
+        }
+
+        function hideSuccess() {
+            const successMsg = document.getElementById('success-message');
+            if (successMsg) {
+                successMsg.classList.remove('show');
+            }
+        }
+
+        // დაამატეთ კლავიატურის მალსახმობები სწრაფი ტესტირებისთვის
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case '1':
+                        e.preventDefault();
+                        applyGalleryGrid();
+                        break;
+                    case '2':
+                        e.preventDefault();
+                        applyBlogGrid();
+                        break;
+                    case '3':
+                        e.preventDefault();
+                        applyDashboardGrid();
+                        break;
+                    case '4':
+                        e.preventDefault();
+                        applyCardGrid();
+                        break;
+                }
+            }
+        });
+
+        // დაამატეთ სახალისო იასტერ ეგი
+        console.log('%c🎯 CSS Grid ოსტატის გამოწვევა! %c\nსცადეთ Ctrl+1, Ctrl+2, Ctrl+3, ან Ctrl+4-ის დაჭერა ამოხსნების სწრაფად გამოსაყენებლად!\n\nბონუსი: შეგიძლიათ კოდის შეცვლა masonry განლაგების შესაქმნელად?', 
+            'background: linear-gradient(135deg, #667eea, #764ba2); color: white; font-size: 20px; padding: 10px;',
+            'color: #667eea; font-size: 14px;');
+    </script>
+</body>
+</html>

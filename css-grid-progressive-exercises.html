@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid - Progressive Learning Path</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            background: white;
+            color: #333;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .level {
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .level-header {
+            padding: 25px 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .level-title {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .level-description {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 0;
+        }
+
+        .exercise {
+            padding: 30px;
+            border-right: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .exercise:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .exercise-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .exercise h3 {
+            color: #374151;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .task-description {
+            color: #6b7280;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .workspace-small {
+            border: 2px dashed #d1d5db;
+            padding: 20px;
+            border-radius: 10px;
+            min-height: 200px;
+            margin-bottom: 15px;
+            background: #fafafa;
+            position: relative;
+        }
+
+        .workspace-small::before {
+            content: "Work Here";
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 11px;
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        .btn-small {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-small:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-small.reset {
+            background: #6b7280;
+        }
+
+        .btn-small.hint {
+            background: #10b981;
+        }
+
+        .code-snippet {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .code-snippet.show {
+            display: block;
+        }
+
+        /* Level 1: Basic Grid Setup */
+        .basic-grid {
+            background: #f3f4f6;
+            min-height: 150px;
+            border-radius: 8px;
+        }
+
+        .grid-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 6px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5px;
+        }
+
+        /* Level 2: Columns and Rows */
+        .columns-rows-grid {
+            background: #f3f4f6;
+            min-height: 200px;
+            border-radius: 8px;
+        }
+
+        .colored-item {
+            padding: 15px;
+            text-align: center;
+            border-radius: 6px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2px;
+            color: white;
+        }
+
+        .colored-item:nth-child(1) { background: #ef4444; }
+        .colored-item:nth-child(2) { background: #f59e0b; }
+        .colored-item:nth-child(3) { background: #10b981; }
+        .colored-item:nth-child(4) { background: #3b82f6; }
+        .colored-item:nth-child(5) { background: #8b5cf6; }
+        .colored-item:nth-child(6) { background: #ec4899; }
+
+        /* Level 3: Gaps and Spanning */
+        .gaps-span-grid {
+            background: #f3f4f6;
+            min-height: 200px;
+            border-radius: 8px;
+        }
+
+        .span-item {
+            background: linear-gradient(135deg, #4f46e5, #06b6d4);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 6px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Level 4: Grid Areas */
+        .areas-grid {
+            background: #f3f4f6;
+            min-height: 250px;
+            border-radius: 8px;
+        }
+
+        .area-item {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 6px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-area { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .nav-area { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .main-area { background: linear-gradient(135deg, #10b981, #059669); }
+        .sidebar-area { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .footer-area { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+
+        /* Level 5: Responsive Grids */
+        .responsive-grid {
+            background: #f3f4f6;
+            min-height: 200px;
+            border-radius: 8px;
+        }
+
+        .responsive-item {
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 6px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
+        }
+
+        .progress-bar {
+            background: #e5e7eb;
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #10b981, #059669);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .completion-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .completion-badge.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 CSS Grid Learning Path</h1>
+            <p style="font-size: 1.2em; color: #6b7280; margin-top: 10px;">Master Grid step by step - from basics to advanced!</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="overall-progress"></div>
+            </div>
+            <p><span id="progress-text">Progress: 0/15 exercises completed</span></p>
+        </div>
+
+        <!-- Level 1: Basic Grid Setup -->
+        <div class="level">
+            <div class="level-header">
+                <div class="level-title">🚀 Level 1: Creating Your First Grid</div>
+                <div class="level-description">Learn the fundamental display: grid property</div>
+            </div>
+            <div class="exercise-grid">
+                <div class="exercise">
+                    <div class="exercise-number">1</div>
+                    <h3>Enable Grid Display</h3>
+                    <div class="task-description">
+                        Turn the container into a grid. Add <code>display: grid</code> to see the magic happen!
+                    </div>
+                    <div class="workspace-small">
+                        <div class="basic-grid" id="grid1">
+                            <div class="grid-item">Item 1</div>
+                            <div class="grid-item">Item 2</div>
+                            <div class="grid-item">Item 3</div>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="solveExercise(1, 'grid1', 'display: grid;')">Solve</button>
+                    <button class="btn-small reset" onclick="resetExercise('grid1')">Reset</button>
+                    <button class="btn-small hint" onclick="toggleHint('hint1')">Hint</button>
+                    <div class="code-snippet" id="hint1">
+                        .basic-grid {<br>&nbsp;&nbsp;display: grid;<br>}
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <div class="exercise-number">2</div>
+                    <h3>Add Basic Columns</h3>
+                    <div class="task-description">
+                        Create 3 equal columns using <code>grid-template-columns: 1fr 1fr 1fr</code>
+                    </div>
+                    <div class="workspace-small">
+                        <div class="basic-grid" id="grid2">
+                            <div class="grid-item">A</div>
+                            <div class="grid-item">B</div>
+                            <div class="grid-item">C</div>
+                            <div class="grid-item">D</div>
+                            <div class="grid-item">E</div>
+                            <div class="grid-item">F</div>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="solveExercise(2, 'grid2', 'display: grid; grid-template-columns: 1fr 1fr 1fr;')">Solve</button>
+                    <button class="btn-small reset" onclick="resetExercise('grid2')">Reset</button>
+                    <button class="btn-small hint" onclick="toggleHint('hint2')">Hint</button>
+                    <div class="code-snippet" id="hint2">
+                        .basic-grid {<br>&nbsp;&nbsp;display: grid;<br>&nbsp;&nbsp;grid-template-columns: 1fr 1fr 1fr;<br>}
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <div class="exercise-number">3</div>
+                    <h3>Using Repeat Function</h3>
+                    <div class="task-description">
+                        Simplify your code! Use <code>repeat(4, 1fr)</code> to create 4 equal columns.
+                    </div>
+                    <div class="workspace-small">
+                        <div class="basic-grid" id="grid3">
+                            <div class="grid-item">1</div>
+                            <div class="grid-item">2</div>
+                            <div class="grid-item">3</div>
+                            <div class="grid-item">4</div>
+                            <div class="grid-item">5</div>
+                            <div class="grid-item">6</div>
+                            <div class="grid-item">7</div>
+                            <div class="grid-item">8</div>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="solveExercise(3, 'grid3', 'display: grid; grid-template-columns: repeat(4, 1fr);')">Solve</button>
+                    <button class="btn-small reset" onclick="resetExercise('grid3')">Reset</button>
+                    <button class="btn-small hint" onclick="toggleHint('hint3')">Hint</button>
+                    <div class="code-snippet" id="hint3">
+                        .basic-grid {<br>&nbsp;&nbsp;display: grid;<br>&nbsp;&nbsp;grid-template-columns: repeat(4, 1fr);<br>}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level 2: Columns and Rows -->
+        <div class="level">
+            <div class="level-header">
+                <div class="level-title">📐 Level 2: Mastering Columns and Rows</div>
+                <div class="level-description">Control both dimensions of your grid layout</div>
+            </div>
+            <div class="exercise-grid">
+                <div class="exercise">
+                    <div class="exercise-number">4</div>
+                    <h3>Fixed Size Columns</h3>
+                    <div class="task-description">
+                        Create columns with specific sizes: 100px, 200px, 1fr (flexible).
+                    </div>
+                    <div class="workspace-small">
+                        <div class="columns-rows-grid" id="grid4">
+                            <div class="colored-item">Small</div>
+                            <div class="colored-item">Medium</div>
+                            <div class="colored-item">Flexible</div>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="solveExercise(4, 'grid4', 'display: grid; grid-template-columns: 100px 200px 1fr;')">Solve</button>
+                    <button class="btn-small reset" onclick="resetExercise('grid4')">Reset</button>
+                    <button class="btn-small hint" onclick="toggleHint('hint4')">Hint</button>
+                    <div class="code-snippet" id="hint4">
+                        .columns-rows-grid {<br>&nbsp;&nbsp;display: grid;<br>&nbsp;&nbsp;grid-template-columns: 100px 200px 1fr;<br>}
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <div class="exercise-number">5</div>
+                    <h3>Define Row Heights</h3>
+                    <div class="task-description">
+                        Add row heights using <code>grid-template-rows: 60px 80px</code> for 2 rows.
+                    </div>
+                    <div class="workspace-small">
+                        <div class="columns-rows-grid" id="grid5">
+                            <div class="colored-item">1</div>
+                            <div class="colored-item">2</div>
+                            <div class="colored-item">3</div>
+                            <div class="colored-item">4</div>
+                            <div class="colored-item">5</div>
+                            <div class="colored-item">6</div>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="solveExercise(5, 'grid5', 'display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 60px 80px;')">Solve</button>
+                    <button class="btn-small reset" onclick="resetExercise('grid5')">Reset</button>
+                    <button class="btn-small hint" onclick="toggleHint('hint5')">Hint</button>
+                    <div class="code-snippet" id="hint5">
+                        .columns-rows-grid {<br>&nbsp;&nbsp;display: grid;<br>&nbsp;&nbsp;grid-template-columns: repeat(3, 1fr);<br>&nbsp;&nbsp;grid-template-rows: 60px 80px;<br>}
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <div class="exercise-number">6</div>
+                    <h3>Mix Units and Fractions</h3>
+                    <div class="task-description">
+                        Combine different units: <code>grid-template-columns: 150px 2fr 1fr</code>
+                    </div>
+                    <div class="workspace-small">
+                        <div class="columns-rows-grid" id="grid6">
+                            <div class="colored-item">Fixed</div>
+                            <div class="colored-item">Double Flex</div>
+                            <div class="colored-item">Single Flex</div>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="solveExercise(6, 'grid6', 'display: grid; grid-template-columns: 150px 2fr 1fr;')">Solve</button>
+                    <button class="btn-small reset" onclick="resetExercise('grid6')">Reset</button>
+                    <button class="btn-small hint" onclick="toggleHint('hint6')">Hint</button>
+                    <div class="code-snippet" id="hint6">
+                        .columns-rows-grid {<br>&nbsp;&nbsp;display: grid;<br>&nbsp;&nbsp;grid-template-columns: 150px 2fr 1fr;<br>}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level 3: Gaps and Spanning -->
+        <div class="level">
+            <div class="level-header">
+                <div class="level-title">🔲 Level 3: Gaps and Spanning Cells</div>
+                <div class="level-description">Add spacing and make items span multiple cells</div>
+            </div>
+            <div class="exercise-grid">
+                <div class="exercise">
+                    <div class="exercise-number">7</div>
+                    <h3>Add Grid Gaps</h3>
+                    <div class="task-description">
+                        Add 15px spacing between grid items using the <code>gap</code> property.
+                    </div>
+                    <div class="workspace-small">
+                        <div class="gaps-span-grid" id="grid7">
+                            <div class="span-item">A</div>
+                            <div class="span-item">B</div>
+                            <div class="span-item">C</div>
+                            <div class="span-item">D</div>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="solveExercise(7, 'grid7', 'display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;')">Solve</button>
+                    <button class="btn-small reset" onclick="resetExercise('grid7')">Reset</button>
+                    <button class="btn-small hint" onclick="toggleHint('hint7')">Hint</button>
+                    <div class="code-snippet" id="hint7">
+                        .gaps-span-grid {<br>&nbsp;&nbsp;display: grid;<br>&nbsp;&nbsp;grid-template-columns: repeat(2, 1fr);<br>&nbsp;&nbsp;gap: 15px;<br>}
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <div class="exercise-number">8</div>
+                    <h3>Span Columns</h3>
+                    <div class="task-description">
+                        Make the first item span 2 columns using <code>grid-column: span 2</code>.
+                    </div>
+                    <div class="workspace-small">
+                        <div class="gaps-span-grid" id="grid8">
+                            <div class="span-item" id="span-item-1">Span 2 Cols</div>
+                            <div class="span-item">B</div>
+                            <div class="span-item">C</div>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="solveExerciseWithChild(8, 'grid8', 'display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;', 'span-item-1', 'grid-column: span 2;')">Solve</button>
+                    <button class="btn-small reset" onclick="resetExerciseWithChild('grid8', 'span-item-1')">Reset</button>
+                    <button class="btn-small hint" onclick="toggleHint('hint8')">Hint</button>
+                    <div class="code-snippet" id="hint8">
+                        .gaps-span-grid {<br>&nbsp;&nbsp;display: grid;<br>&nbsp;&nbsp;grid-template-columns: repeat(3, 1fr);<br>&nbsp;&nbsp;gap: 10px;<br>}<br><br>
+                        .span-item:first-child {<br>&nbsp;&nbsp;grid-column: span 2;<br>}
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <div class="exercise-number">9</div>
+                    <h3>Span Rows and Columns</h3>
+                    <div class="task-description">
+                        Make an item span 2 rows and 2 columns: <code>grid-column: span 2; grid-row: span 2</code>
+                    </div>
+                    <div class="workspace-small">
+                        <div class="gaps-span-grid" id="grid9">
+                            <div class="span-item" id="span-item-2">2x2</div>
+                            <div class="span-item">B</div>
+                            <div class="span-item">C</div>
+                            <div class="span-item">D</div>
+                            <div class="span-item">E</div>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="solveExerciseWithChild(9, 'grid9', 'display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;', 'span-item-2', 'grid-column: span 2; grid-row: span 2;')">Solve</button>
+                    <button class="btn-small reset" onclick="resetExerciseWithChild('grid9', 'span-item-2')">Reset</button>
+                    <button class="btn-small hint" onclick="toggleHint('hint9')">Hint</button>
+                    <div class="code-snippet" id="hint9">
+                        .gaps-span-grid {<br>&nbsp;&nbsp;display: grid;<br>&nbsp;&nbsp;grid-template-columns: repeat(3, 1fr);<br>&nbsp;&nbsp;gap: 10px;<br>}<br><br>
+                        .span-item:first-child {<br>&nbsp;&nbsp;grid-column: span 2;<br>&nbsp;&nbsp;grid-row: span 2;<br>}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level 4: Grid Areas -->
+        <div class="level">
+            <div class="level-header">
+                <div class="level-title">🗺️ Level 4: Named Grid Areas</div>
+                <div class="level-description">Create semantic layouts with grid-template-areas</div>
+            </div>
+            <div class="exercise-grid">
+                <div class="exercise">
+                    <div class="exercise-number">10</div>
+                    <h3>Simple Grid Areas</h3>
+                    <div class="task-description">
+                        Create a layout with named areas: "header header" "main sidebar"
+                    </div>
+                    <div class="workspace-small">
+                        <div class="areas-grid" id="grid10">
+                            <div class="area-item header-area" id="header">Header</div>
+                            <div class="area-item main-area" id="main">Main</div>
+                            <div class="area-item sidebar-area" id="sidebar">Sidebar</div>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="solveGridAreas(10, 'grid10')">Solve</button>
+                    <button class="btn-small reset" onclick="resetGridAreas('grid10')">Reset</button>
+                    <button class="btn-small hint" onclick="toggleHint('hint10')">Hint</button>
+                    <div class="code-snippet" id="hint10">
+                        .areas-grid {<br>&nbsp;&nbsp;display: grid;<br>&nbsp;&nbsp;grid-template-areas:<br>&nbsp;&nbsp;&nbsp;&nbsp;"header header"<br>&nbsp;&nbsp;&nbsp;&nbsp;"main sidebar";<br>&nbsp;&nbsp;gap: 10px;<br>}<br><br>
+                        #header { grid-area: header; }<br>
+                        #main { grid-area: main; }<br>
+                        #sidebar { grid-area: sidebar; }
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <div class="exercise-number">11</div>
+                    <h3>Complex Layout Areas</h3>
+                    <div class="task-description">
+                        Create a full page layout with header, nav, main, sidebar, and footer.
+                    </div>
+                    <div class="workspace-small">
+                        <div class="areas-grid" id="grid11" style="min-height: 250px;">
+                            <div class="area-item header-area" id="header2">Header</div>
+                            <div class="area-item nav-area" id="nav">Nav</div>
+                            <div class="area-item main-area" id="main2">Main</div>
+                            <div class="area-item sidebar-area" id="sidebar2">Sidebar</div>
+                            <div class="area-item footer-area" id="footer">Footer</div>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="solveComplexAreas(11, 'grid11')">Solve</button>
+                    <button class="btn-small reset" onclick="resetComplexAreas('grid11')">Reset</button>
+                    <button class="btn-small hint" onclick="toggleHint('hint11')">Hint</button>
+                    <div class="code-snippet" id="hint11">
+                        .areas-grid {<br>&nbsp;&nbsp;display: grid;<br>&nbsp;&nbsp;grid-template-columns: 1fr 3fr 1fr;<br>&nbsp;&nbsp;grid-template-areas:<br>&nbsp;&nbsp;&nbsp;&nbsp;"header header header"<br>&nbsp;&nbsp;&nbsp;&nbsp;"nav main sidebar"<br>&nbsp;&nbsp;&nbsp;&nbsp;"footer footer footer";<br>&nbsp;&nbsp;gap: 10px;<br>}
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <div class="exercise-number">12</div>
+                    <h3>Empty Grid Cells</h3>
+                    <div class="task-description">
+                        Use dots (.) to create empty spaces in your grid areas.
+                    </div>
+                    <div class="workspace-small">
+                        <div class="areas-grid" id="grid12">
+                            <div class="area-item main-area" id="center">Center</div>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="solveEmptyAreas(12, 'grid12')">Solve</button>
+                    <button class="btn-small reset" onclick="resetEmptyAreas('grid12')">Reset</button>
+                    <button class="btn-small hint" onclick="toggleHint('hint12')">Hint</button>
+                    <div class="code-snippet" id="hint12">
+                        .areas-grid {<br>&nbsp;&nbsp;display: grid;<br>&nbsp;&nbsp;grid-template-columns: repeat(3, 1fr);<br>&nbsp;&nbsp;grid-template-areas:<br>&nbsp;&nbsp;&nbsp;&nbsp;". . ."<br>&nbsp;&nbsp;&nbsp;&nbsp;". center ."<br>&nbsp;&nbsp;&nbsp;&nbsp;". . .";<br>&nbsp;&nbsp;gap: 10px;<br>}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level 5: Responsive Grids -->
+        <div class="level">
+            <div class="level-header">
+                <div class="level-title">📱 Level 5: Responsive Grid Magic</div>
+                <div class="level-description">Make grids that adapt to any screen size</div>
+            </div>
+            <div class="exercise-grid">
+                <div class="exercise">
+                    <div class="exercise-number">13</div>
+                    <h3>Auto-Fit Columns</h3>
+                    <div class="task-description">
+                        Use <code>repeat(auto-fit, minmax(150px, 1fr))</code> for responsive columns.
+                    </div>
+                    <div class="workspace-small">
+                        <div class="responsive-grid" id="grid13">
+                            <div class="responsive-item">Card 1</div>
+                            <div class="responsive-item">Card 2</div>
+                            <div class="responsive-item">Card 3</div>
+                            <div class="responsive-item">Card 4</div>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="solveExercise(13, 'grid13', 'display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;')">Solve</button>
+                    <button class="btn-small reset" onclick="resetExercise('grid13')">Reset</button>
+                    <button class="btn-small hint" onclick="toggleHint('hint13')">Hint</button>
+                    <div class="code-snippet" id="hint13">
+                        .responsive-grid {<br>&nbsp;&nbsp;display: grid;<br>&nbsp;&nbsp;grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));<br>&nbsp;&nbsp;gap: 15px;<br>}
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <div class="exercise-number">14</div>
+                    <h3>Auto-Fill vs Auto-Fit</h3>
+                    <div class="task-description">
+                        Try <code>auto-fill</code> instead of <code>auto-fit</code> to see the difference!
+                    </div>
+                    <div class="workspace-small">
+                        <div class="responsive-grid" id="grid14">
+                            <div class="responsive-item">Item A</div>
+                            <div class="responsive-item">Item B</div>
+                            <div class="responsive-item">Item C</div>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="solveExercise(14, 'grid14', 'display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px;')">Solve</button>
+                    <button class="btn-small reset" onclick="resetExercise('grid14')">Reset</button>
+                    <button class="btn-small hint" onclick="toggleHint('hint14')">Hint</button>
+                    <div class="code-snippet" id="hint14">
+                        .responsive-grid {<br>&nbsp;&nbsp;display: grid;<br>&nbsp;&nbsp;grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));<br>&nbsp;&nbsp;gap: 15px;<br>}
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <div class="exercise-number">15</div>
+                    <h3>Responsive with Constraints</h3>
+                    <div class="task-description">
+                        Final challenge! Create a responsive grid with min 200px, max 3 columns.
+                    </div>
+                    <div class="workspace-small">
+                        <div class="responsive-grid" id="grid15">
+                            <div class="responsive-item">Final 1</div>
+                            <div class="responsive-item">Final 2</div>
+                            <div class="responsive-item">Final 3</div>
+                            <div class="responsive-item">Final 4</div>
+                            <div class="responsive-item">Final 5</div>
+                        </div>
+                    </div>
+                    <button class="btn-small" onclick="solveExercise(15, 'grid15', 'display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); max-width: 800px; margin: 0 auto; gap: 20px;')">Solve</button>
+                    <button class="btn-small reset" onclick="resetExercise('grid15')">Reset</button>
+                    <button class="btn-small hint" onclick="toggleHint('hint15')">Hint</button>
+                    <div class="code-snippet" id="hint15">
+                        .responsive-grid {<br>&nbsp;&nbsp;display: grid;<br>&nbsp;&nbsp;grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));<br>&nbsp;&nbsp;max-width: 800px;<br>&nbsp;&nbsp;margin: 0 auto;<br>&nbsp;&nbsp;gap: 20px;<br>}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: white; padding: 30px; border-radius: 20px; text-align: center; margin-top: 30px;">
+            <h2 style="color: #10b981; margin-bottom: 15px;">🏆 Congratulations!</h2>
+            <p style="font-size: 1.1em; color: #6b7280;">You've mastered the fundamentals of CSS Grid! Ready for advanced challenges?</p>
+        </div>
+    </div>
+
+    <script>
+        let completedExercises = new Set();
+        let totalExercises = 15;
+
+        function solveExercise(exerciseNum, gridId, styles) {
+            const grid = document.getElementById(gridId);
+            grid.style.cssText = styles;
+            markComplete(exerciseNum);
+        }
+
+        function solveExerciseWithChild(exerciseNum, gridId, gridStyles, childId, childStyles) {
+            const grid = document.getElementById(gridId);
+            const child = document.getElementById(childId);
+            grid.style.cssText = gridStyles;
+            child.style.cssText = childStyles;
+            markComplete(exerciseNum);
+        }
+
+        function solveGridAreas(exerciseNum, gridId) {
+            const grid = document.getElementById(gridId);
+            grid.style.cssText = 'display: grid; grid-template-areas: "header header" "main sidebar"; gap: 10px;';
+            document.getElementById('header').style.gridArea = 'header';
+            document.getElementById('main').style.gridArea = 'main';
+            document.getElementById('sidebar').style.gridArea = 'sidebar';
+            markComplete(exerciseNum);
+        }
+
+        function solveComplexAreas(exerciseNum, gridId) {
+            const grid = document.getElementById(gridId);
+            grid.style.cssText = 'display: grid; grid-template-columns: 1fr 3fr 1fr; grid-template-areas: "header header header" "nav main sidebar" "footer footer footer"; gap: 10px;';
+            document.getElementById('header2').style.gridArea = 'header';
+            document.getElementById('nav').style.gridArea = 'nav';
+            document.getElementById('main2').style.gridArea = 'main';
+            document.getElementById('sidebar2').style.gridArea = 'sidebar';
+            document.getElementById('footer').style.gridArea = 'footer';
+            markComplete(exerciseNum);
+        }
+
+        function solveEmptyAreas(exerciseNum, gridId) {
+            const grid = document.getElementById(gridId);
+            grid.style.cssText = 'display: grid; grid-template-columns: repeat(3, 1fr); grid-template-areas: ". . ." ". center ." ". . ."; gap: 10px;';
+            document.getElementById('center').style.gridArea = 'center';
+            markComplete(exerciseNum);
+        }
+
+        function resetExercise(gridId) {
+            const grid = document.getElementById(gridId);
+            grid.style.cssText = '';
+        }
+
+        function resetExerciseWithChild(gridId, childId) {
+            const grid = document.getElementById(gridId);
+            const child = document.getElementById(childId);
+            grid.style.cssText = '';
+            child.style.cssText = '';
+        }
+
+        function resetGridAreas(gridId) {
+            const grid = document.getElementById(gridId);
+            grid.style.cssText = '';
+            document.getElementById('header').style.gridArea = '';
+            document.getElementById('main').style.gridArea = '';
+            document.getElementById('sidebar').style.gridArea = '';
+        }
+
+        function resetComplexAreas(gridId) {
+            const grid = document.getElementById(gridId);
+            grid.style.cssText = '';
+            document.getElementById('header2').style.gridArea = '';
+            document.getElementById('nav').style.gridArea = '';
+            document.getElementById('main2').style.gridArea = '';
+            document.getElementById('sidebar2').style.gridArea = '';
+            document.getElementById('footer').style.gridArea = '';
+        }
+
+        function resetEmptyAreas(gridId) {
+            const grid = document.getElementById(gridId);
+            grid.style.cssText = '';
+            document.getElementById('center').style.gridArea = '';
+        }
+
+        function toggleHint(hintId) {
+            const hint = document.getElementById(hintId);
+            hint.classList.toggle('show');
+        }
+
+        function markComplete(exerciseNum) {
+            completedExercises.add(exerciseNum);
+            updateProgress();
+            
+            // Add completion badge
+            const exerciseElement = document.querySelector(`.exercise-number:nth-of-type(${exerciseNum})`);
+            if (exerciseElement && !exerciseElement.nextElementSibling?.classList.contains('completion-badge')) {
+                const badge = document.createElement('span');
+                badge.className = 'completion-badge show';
+                badge.textContent = '✓';
+                exerciseElement.parentNode.appendChild(badge);
+            }
+        }
+
+        function updateProgress() {
+            const progress = (completedExercises.size / totalExercises) * 100;
+            document.getElementById('overall-progress').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = 
+                `Progress: ${completedExercises.size}/${totalExercises} exercises completed`;
+            
+            if (completedExercises.size === totalExercises) {
+                setTimeout(() => {
+                    alert('🎉 Congratulations! You\'ve completed all CSS Grid exercises! You\'re now ready for advanced layouts!');
+                }, 500);
+            }
+        }
+
+        // Keyboard shortcuts for quick testing
+        document.addEventListener('keydown', (e) => {
+            if (e.altKey && e.key >= '1' && e.key <= '9') {
+                e.preventDefault();
+                const exerciseNum = parseInt(e.key);
+                // Auto-solve exercise for quick testing
+                const solveButtons = document.querySelectorAll('.btn-small:not(.reset):not(.hint)');
+                if (solveButtons[exerciseNum - 1]) {
+                    solveButtons[exerciseNum - 1].click();
+                }
+            }
+        });
+
+        console.log('%c🎯 CSS Grid Learning Path! %c\nKeyboard shortcuts: Alt+1 through Alt+9 for quick testing\nComplete all 15 exercises to become a Grid master! 🚀', 
+            'background: linear-gradient(135deg, #667eea, #764ba2); color: white; font-size: 16px; padding: 8px;',
+            'color: #667eea; font-size: 12px;');
+    </script>
+</body>
+</html>
